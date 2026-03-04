@@ -1,7 +1,39 @@
 # Änderungen in API v3.0 gegenüber API v2.0
 
 ## Schreibweise von Feldnamen
-...
+
+Alle Feldnamen sind nun in snake_case geändert worden und anführende Unterstriche wurden entfernt.
+Das betrifft alle Endpunkte und Actions. (Actions sind Aktionen die auf einzelnen Endpunkten ausgeführt werden können.
+Beispielsweise `member/me/permissions` oder auch `member/{member_id}/email-notification`.)
+
+### Im Header jeder Antwort der API:
+- Das Feld `tokenRefreshNeeded` welches impliziert, dass das Token erneuert werden muss, heißt nun `token_refresh_needed`.
+
+### Authentifizierung:
+- Das Feld `2FA` im `get-token` Endpunkt heißt nun `2_fa`.
+- Das Feld `needs2FA` im `get-token` Endpunkt heißt nun `needs2_fa`.
+
+### Beispiele wie Felder ab v3.0 heißen:
+- Das Feld `contactDetails` im `member` Endpunkt heißt nun `contact_details`.
+- Das Feld `_deleteAfterDate` in allen Endpunkten heißt nun `delete_after_date`.
+- Das Feld `firstName` im `contact-details` Endpunkt heißt nun `first_name`.
+- Das Feld `availableSkr42Spheres` im `organization` Endpunkt heißt jetzt `available_skr42_spheres`.
+- Das Feld `_defaultProfilePicture` im `organization` Endpunkt heißt jetzt `default_profile_picture`.
+
+### Beispiele wie Actions ab v3.0 Felder erwarten:
+- In der Action `member/{member_id}/change-password` heißen die Felder `currentPassword`, `newPassword` und `2FA` nun `current_password`, `new_password` und `2_fa`.
+- ...
+
+Alle Filter sind ebenfalls betroffen und sind in snake_case!
+
+### Beispiele wie Filter ab v3.0 heißen:
+- Der Filter `_chairmanPermissionGroup` im `member` Endpunkt heißt nun `chairman_permission_group`.
+- Der Filter `customfilter` in einigen Endpunkten heißt nun `custom_filter`.
+- Der Filter `usesessionfilter` in einigen Endpunkten heißt nun `use_session_filter`.
+- Der Filter `contactDetailsGroups` im `contact-details` Endpunkt heißt nun `contact_details_groups`.
+
+
+
 
 ## Geänderte Endpunkte
 
