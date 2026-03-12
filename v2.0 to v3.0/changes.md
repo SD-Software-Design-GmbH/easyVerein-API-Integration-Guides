@@ -26,6 +26,7 @@ Beispielsweise `member/me/permissions` oder auch `member/{member_id}/email-notif
 - In der Action `member/me/permissions` heißen die Felder im Rückgabewert wie z. B. `_isChairman`, `bookkeepingEnabled` und `changeBankDataWhenDebit` heißen jetzt `is_chairman`, `bookkeeping_enabled` und `change_bank_data_when_debit`.
 - In der Action `member/email-notification` heißen die Werte für `action` statt z. B. `emailNotificationConfirmResignation` und `emailNotificationConfirmMembership` jetzt `email_notification_confirm_resignation` und `email_notification_confirm_membership`.
 - In der Action `contact-details/income-and-expenses` heißen die Rückgabedaten statt z. B. `totalOfOpenInvoices` und `totalOfOpenInvoicesOut` jetzt `total_of_open_invoices` und `total_of_open_invoices_out`.
+- In allen `mass-action`-Actions (z. B. `member/mass-action`, `member/mass-action-custom-fields`, `member/mass-action-member-groups`, `inventory-object/mass-action-custom-fields` usw.) heißen `useSessionFilter` und `customFilter` jetzt `use_session_filter` und `custom_filter`.
 
 #### Alle Filter sind ebenfalls betroffen und sind in snake_case!
 
