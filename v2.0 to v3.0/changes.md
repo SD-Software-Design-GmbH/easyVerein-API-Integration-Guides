@@ -19,6 +19,9 @@ Das betrifft alle Endpunkte und Actions. (Actions sind Aktionen, die auf einzeln
 - Das Feld `firstName` im `contact-details` Endpunkt heißt jetzt `first_name`.
 - Das Feld `availableSkr42Spheres` im `organization` Endpunkt heißt jetzt `available_skr42_spheres`.
 - Das Feld `_defaultProfilePicture` im `organization` Endpunkt heißt jetzt `default_profile_picture`.
+- Das Feld `membershipCTEDownload` im `organization` Endpunkt heißt jetzt `membership_cte_download`.
+- Das Feld `showEPCQRCode` im `organization` Endpunkt heißt jetzt `show_epcqr_code`.
+- Das Feld `user_allowICSExport` im `member-group` Endpunkt heißt jetzt `user_allow_ics_export`.
 
 ### Beispiele, wie Actions jetzt Felder erwarten und zurückgeben:
 - In der Action `member/{member_id}/change-password` heißen die Felder `currentPassword`, `newPassword` und `2FA` jetzt `current_password`, `new_password` und `2_fa`.
