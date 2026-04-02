@@ -38,6 +38,15 @@ Das betrifft alle Endpunkte und Actions. (Actions sind Aktionen, die auf einzeln
 - Der Filter `usesessionfilter` in einigen Endpunkten heißt jetzt `use_session_filter`.
 - Der Filter `contactDetailsGroups` im `contact-details` Endpunkt heißt jetzt `contact_details_groups`.
 
+### Weitere geänderte Filter
+- Alle Filter, die auf `__not` enden, enden jetzt auf `__ne` (`ne` = *not equal*), beispielhaft:
+    - `bookingprojectassignment__not` heißt jetzt `booking_project_assignment_ne`
+    - `location_object__not` heißt jetzt `location_object__ne`
+- `booking`-Endpunkt:
+    - `bookingprojectassignment` heißt jetzt `booking_project_assignment`
+    - `billing_id__isempty` heißt jetzt `billing_id`
+- `member`-Endpunkt:
+    - `is_referenced_by_org_user` heißt jetzt `is_referenced_by_member`
 
 ## Geänderte Endpunkte
 
@@ -129,7 +138,7 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Bei `bulk-update`/`bulk-create` muss zusätzlich `custom_field` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 
-## Weitere Änderungen
+## Geänderte Actions
 - `participation`-Endpunkt:
     - Die `invite`-Action benötigt nicht mehr `participation_address`, sondern eine Liste von Adressen `participation_addresses`.
     - Die `invite-groups`-Action, die bisher auf dem `event`-Endpunkt war, ist jetzt -- analog zu `invite` -- auf dem `participation`-Endpunkt. Zusätzlich muss der Termin als `participation_event` angegeben werden.
