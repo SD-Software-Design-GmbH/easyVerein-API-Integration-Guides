@@ -71,8 +71,8 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Eine einzelne Gruppenmitgliedschaften eines Mitglieds anfragen: `member/{member_id}/groups/{member_group_assignment_id}` => `member-group-assignment/{member_group_assignment_id}`
 - Filtern ist zusätzlich möglich mit:  `user_object`, `user_object__in`, `user_object__not`
 - Bei `POST` muss immer `user_object` mitgegeben werden.
-- Bei `bulk-update`/`bulk-create` muss zusätzlich immer `user_object` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
+- Bei `bulk-create` muss zusätzlich immer `user_object` mitgegeben werden.
 - Statt `member/groups/mass-action` gibt es `member/mass-action-member-groups`. Die Daten, die übergeben werden, bleiben gleich.
 
 ### `member/{member_id}/custom-fields`
@@ -81,8 +81,8 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Filtern ist zusätzlich möglich mit:  `user_object`, `user_object__in`, `user_object__not`
 - Der Filter `customField` mit mehreren komma-getrennten Werten heißt jetzt `custom_field__in`. `custom_field` filtert nur nach einem einzigen Wert.
 - Bei `POST` muss vom Admin mit Schreibrechten auf der Mitgliederverwaltung `user_object` mitgegeben werden. Ansonsten ist das nicht nötig, da ansonsten der Eintrag immer für einen selbst erstellt wird.
-- Bei `bulk-update`/`bulk-create` muss zusätzlich `user_object` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
+- Bei `bulk-create` muss zusätzlich `user_object` mitgegeben werden.
 - Statt `member/custom-fields/mass-action` gibt es `member/mass-action-custom-fields`. Die Daten, die übergeben werden, bleiben gleich.
 
 ### `member/{member_id}/custom-fields/{custom_field_assignment_id}/change-requests`
@@ -96,8 +96,8 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Ein einzelnes individuelles Feld einer Adresse anfragen: `contact-details/{address_id}/custom-fields/{custom_field_assignment_id}` => `contact-details-custom-field-assignment/{custom_field_assignment_id}`
 - Filtern ist möglich mit:  `address_object`, `address_object__in`, `address_object__not`, `custom_field`, `custom_field__in`, `custom_field__not`
 - Bei `POST` muss `address_object` mitgegeben werden.
-- Bei `bulk-update`/`bulk-create` muss zusätzlich `address_object` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
+- Bei `bulk-create` muss zusätzlich `address_object` mitgegeben werden.
 - Statt `contact-details/custom-fields/mass-action` gibt es `contact-details/mass-action-custom-fields`. Die Daten, die übergeben werden, bleiben gleich.
 
 ### `contact-details/{address_id}/change-requests`
@@ -110,8 +110,8 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Ein einzelnes individuelles Feld eines Inventargegenstands anfragen: `inventory-object/{member_id}/custom-fields/{custom_field_assignment_id}` => `inventory-object-custom-field-assignment/{custom_field_assignment_id}`
 - Filtern ist zusätzlich möglich mit:  `inventory_object`, `inventory_object__in`, `inventory_object__not`
 - Bei `POST` muss `inventory_object` mitgegeben werden.
-- Bei `bulk-update`/`bulk-create` muss zusätzlich `inventory_object` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
+- Bei `bulk-create` muss zusätzlich `inventory_object` mitgegeben werden.
 - Statt `inventory-object/custom-fields/mass-action` gibt es `inventory-object/mass-action-custom-fields`.
 - Filter `customField` mit mehreren komma-getrennten Werten heißt jetzt `custom_field__in`. `custom_field` filtert nur nach einem einzigen Wert.
 
@@ -120,8 +120,8 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Ein einzelnes individuelles Feld eines Termins anfragen: `event/{event_id}/custom-fields/{custom_field_assignment_id}` => `event-custom-field-assignment/{custom_field_assignment_id}`
 - Filtern zusätzlich möglich mit:  `event_object`, `event_object__in`, `event_object__not`, `custom_field`, `custom_field__in`, `custom_field__not`
 - Bei `POST` muss `event_object` mitgegeben werden.
-- Bei `bulk-update`/`bulk-create` muss zusätzlich `event_object` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
+- Bei `bulk-create` muss zusätzlich `event_object` mitgegeben werden.
 
 ### `event/{event_id}/participation`
 - Teilnahmen eines Termins anfragen: `event/{event_id}/participation` => `participation/?participation_event={event_id}`
@@ -135,8 +135,8 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Eine einzelne Auswahloption eines individuellen Felds anfragen: `custom-field/{custom_field_id}/select-options/{select_option_id}` => `select-option/{select_option_id}`
 - Filtern möglich mit:  `custom_field`, `custom_field__in`, `custom_field__not`
 - Bei `POST` muss `custom_field` mitgegeben werden.
-- Bei `bulk-update`/`bulk-create` muss zusätzlich `custom_field` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
+- Bei `bulk-create` muss zusätzlich `custom_field` mitgegeben werden.
 
 ## Geänderte Actions
 - `participation`-Endpunkt:
