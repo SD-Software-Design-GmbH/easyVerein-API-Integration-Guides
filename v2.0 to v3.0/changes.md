@@ -73,7 +73,7 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Bei `POST` muss immer `user_object` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 - Bei `bulk-create` muss zusätzlich immer `user_object` mitgegeben werden.
-- Statt `member/groups/mass-action` gibt es `member/mass-action-member-groups`. Die Daten, die übergeben werden, bleiben gleich.
+- Statt `member/groups/mass-action` gibt es `member/mass-action-member-groups`. Die Daten, die übergeben werden, bleiben gleich, aber in v3.0 müssen die Felder in snake_case übergeben werden.
 
 ### `member/{member_id}/custom-fields`
 - Individuelle Felder eines Mitglieds anfragen: `member/{member_id}/custom-fields` => `member-custom-field-assignment?user_object={member_id}`
@@ -83,7 +83,7 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Bei `POST` muss vom Admin mit Schreibrechten auf der Mitgliederverwaltung `user_object` mitgegeben werden. Ansonsten ist das nicht nötig, da ansonsten der Eintrag immer für einen selbst erstellt wird.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 - Bei `bulk-create` muss zusätzlich `user_object` mitgegeben werden.
-- Statt `member/custom-fields/mass-action` gibt es `member/mass-action-custom-fields`. Die Daten, die übergeben werden, bleiben gleich.
+- Statt `member/custom-fields/mass-action` gibt es `member/mass-action-custom-fields`. Die Daten, die übergeben werden, bleiben gleich, aber in v3.0 müssen die Felder in snake_case übergeben werden.
 
 ### `member/{member_id}/custom-fields/{custom_field_assignment_id}/change-requests`
 - Änderungsanfragen zu einem individuellen Feld eines Mitglieds anfragen: `member/{member_id}/custom-fields/{custom_field_assignment_id}/change-requests` => `member-custom-field-assignment-change-request/?user_custom_field={custom_field_assignment_id}`
@@ -98,7 +98,7 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Bei `POST` muss `address_object` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 - Bei `bulk-create` muss zusätzlich `address_object` mitgegeben werden.
-- Statt `contact-details/custom-fields/mass-action` gibt es `contact-details/mass-action-custom-fields`. Die Daten, die übergeben werden, bleiben gleich.
+- Statt `contact-details/custom-fields/mass-action` gibt es `contact-details/mass-action-custom-fields`. Die Daten, die übergeben werden, bleiben gleich, aber in v3.0 müssen die Felder in snake_case übergeben werden.
 
 ### `contact-details/{address_id}/change-requests`
 - Adress-Änderungsanfragen einer Adresse anfragen: `contact-details/{address_id}/custom-fields` => `contact-details-change-request?address={address_id}`

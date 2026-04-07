@@ -103,3 +103,37 @@ data_for_bulk_update_latest = {
 request_latest = requests.patch(f'https://easyverein.com/api/latest/member-group-assignment/bulk-update', json=data_for_bulk_update_latest, headers=header)
 request_latest_json = request_latest.json()
 print(len(request_latest_json))
+
+# ================================
+# Mass action for group assignments
+# ================================
+
+# In API version `stable`
+data_for_mass_action_stable = {
+    "data": {
+        "entries": [
+            {
+                "memberGroup": member_group_id
+            }
+        ]
+    },
+    "ids": [member_id]
+}
+request_stable = requests.patch(f'https://easyverein.com/api/stable/member/groups/mass-action', json=data_for_mass_action_stable, headers=header)
+request_stable_json = request_stable.json()
+print(len(request_stable_json))
+
+# In API version `latest`
+data_for_mass_action_latest = {
+    "data": {
+        "entries": [
+            {
+                "member_group": member_group_id
+            }
+        ]
+    },
+    "ids": [member_id]
+}
+request_latest = requests.patch(f'https://easyverein.com/api/latest/member/mass-action-member-groups', json=data_for_mass_action_latest, headers=header)
+request_latest_json = request_latest.json()
+print(len(request_latest_json))
