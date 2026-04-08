@@ -91,7 +91,7 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Änderungsanfragen zu einem individuellen Feld eines Mitglieds anfragen: `member/{member_id}/custom-fields/{custom_field_assignment_id}/change-requests` => `member-custom-field-assignment-change-request/?user_custom_field={custom_field_assignment_id}`
 - Eine einzelne Änderungsanfragen zu einem individuellen Feld eines Mitglieds anfragen: `member/{member_id}/custom-fields/{custom_field_assignment_id}/change-requests/{member_custom_field_assignment_change_request_id}` => `member-custom-field-assignment-change-request/{member_custom_field_assignment_change_request_id}`
 - Filtern ist zusätzlich möglich mit:  `user_custom_field`, `user_custom_field__in`, `user_custom_field__not`, `user_custom_field__custom_field`, `user_custom_field__custom_field__in`, `user_custom_field__custom_field__not`, `user_custom_field__user_object`, `user_custom_field__user_object__in`, `user_custom_field__user_object__not`, `requesting_user`, `requesting_user__in`, `requesting_user__not`
-- Bei `POST` muss `custom_field` mitgegeben werden.
+- Bei `POST` muss `custom_field` (Referenz auf das individuelle Feld) mitgegeben werden.
 - [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_member_custom_field_assignment_change_requests.py)
 
 ### `contact-details/{address_id}/custom-fields`
