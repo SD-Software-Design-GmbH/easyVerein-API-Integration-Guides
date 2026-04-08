@@ -76,7 +76,7 @@ print(request_latest_json)
 # =============================================
 
 # In API version `stable`
-data_for_create_interval_participation_stable = {
+data_for_create_price_group_participation_stable = {
     'participationAddress': contact_details_id,
     'state': 1,
     'participationPriceFroups': [
@@ -86,12 +86,12 @@ data_for_create_interval_participation_stable = {
         }
     ]
 }
-request_stable = requests.post(f'https://easyverein.com/api/stable/event/{event_id}/participation/create-participation-with-price-groups', json=data_for_create_interval_participation_stable, headers=header)
+request_stable = requests.post(f'https://easyverein.com/api/stable/event/{event_id}/participation/create-participation-with-price-groups', json=data_for_create_price_group_participation_stable, headers=header)
 request_stable_json = request_stable.json()
 print(request_stable_json)
 
 # In API version `latest`
-data_for_create_interval_participation_latest = {
+data_for_create_price_group_participation_latest = {
     'participation_address': contact_details_id,
     'state': 1,
     'participation_price_groups': [
@@ -102,6 +102,83 @@ data_for_create_interval_participation_latest = {
     ],
     'participation_event': event_id
 }
-request_latest = requests.post(f'https://easyverein.com/api/latest/participation/create-participation-with-price-groups', json=data_for_create_interval_participation_latest, headers=header)
+request_latest = requests.post(f'https://easyverein.com/api/latest/participation/create-participation-with-price-groups', json=data_for_create_price_group_participation_latest, headers=header)
 request_latest_json = request_latest.json()
 print(request_latest_json)
+
+# ===================================================
+# bulk-create-participations-with-price-groups action
+# ===================================================
+
+# In API version `stable`
+data_for_bulk_price_group_participation_stable = {
+    "entries": [
+        {
+            "participationEvent": event_id,
+            "participationAddress": contact_details_id,
+            "participationPriceGroups": [
+                {
+                    "priceGroup": price_group_id,
+                    "pieces": 123
+                }
+            ]
+        }
+    ]
+}
+request_stable = requests.post(f'https://easyverein.com/api/stable/event/{event_id}/participation/bulk-create-participation-with-price-groups', json=data_for_bulk_price_group_participation_stable, headers=header)
+request_stable_json = request_stable.json()
+print(request_stable_json)
+
+# In API version `latest`
+data_for_bulk_price_group_participation_latest = {
+    "entries": [
+        {
+            "participation_event": event_id,
+            "participation_address": contact_details_id,
+            "participation_price_groups": [
+                {
+                    "price_group": price_group_id,
+                    "pieces": 123
+                }
+            ]
+        }
+    ]
+}
+request_latest = requests.post(f'https://easyverein.com/api/latest/participation/bulk-create-participation-with-price-groups', json=data_for_bulk_price_group_participation_latest, headers=header)
+request_latest_json = request_latest.json()
+print(request_latest_json)
+
+# ==============================
+# bulk-create new participations
+# ==============================
+
+# In API version `latest` (not available in `stable`)
+data_for_bulk_create_latest = {
+    'entries': [
+        {
+            "participation_address": contact_details_id,
+            "state": 1,
+            "participation_event": event_id
+        }
+    ]
+}
+request_latest = requests.post(f'https://easyverein.com/api/latest/participation/bulk-create', json=data_for_bulk_create_latest, headers=header)
+request_latest_json = request_latest.json()
+print(len(request_latest_json))
+
+# ==========================
+# bulk-update participations
+# ==========================
+
+# In API version `latest` (not available in `stable`)
+data_for_bulk_update_latest = {
+    'entries': [
+        {
+            "id": participation_id,
+            "state": 2
+        }
+    ]
+}
+request_latest = requests.patch(f'https://easyverein.com/api/latest/participation/bulk-update', json=data_for_bulk_update_latest, headers=header)
+request_latest_json = request_latest.json()
+print(len(request_latest_json))

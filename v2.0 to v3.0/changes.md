@@ -74,6 +74,7 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 - Bei `bulk-create` muss zusätzlich immer `user_object` mitgegeben werden.
 - Statt `member/groups/mass-action` gibt es `member/mass-action-member-groups`. Die Daten, die übergeben werden, bleiben gleich, aber in v3.0 müssen die Felder in snake_case übergeben werden.
+- [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_member_group_assignments.py)
 
 ### `member/{member_id}/custom-fields`
 - Individuelle Felder eines Mitglieds anfragen: `member/{member_id}/custom-fields` => `member-custom-field-assignment?user_object={member_id}`
@@ -84,12 +85,14 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 - Bei `bulk-create` muss zusätzlich `user_object` mitgegeben werden.
 - Statt `member/custom-fields/mass-action` gibt es `member/mass-action-custom-fields`. Die Daten, die übergeben werden, bleiben gleich, aber in v3.0 müssen die Felder in snake_case übergeben werden.
+- [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_member_custom_field_assignments.py)
 
 ### `member/{member_id}/custom-fields/{custom_field_assignment_id}/change-requests`
 - Änderungsanfragen zu einem individuellen Feld eines Mitglieds anfragen: `member/{member_id}/custom-fields/{custom_field_assignment_id}/change-requests` => `member-custom-field-assignment-change-request/?user_custom_field={custom_field_assignment_id}`
 - Eine einzelne Änderungsanfragen zu einem individuellen Feld eines Mitglieds anfragen: `member/{member_id}/custom-fields/{custom_field_assignment_id}/change-requests/{member_custom_field_assignment_change_request_id}` => `member-custom-field-assignment-change-request/{member_custom_field_assignment_change_request_id}`
 - Filtern ist zusätzlich möglich mit:  `user_custom_field`, `user_custom_field__in`, `user_custom_field__not`, `user_custom_field__custom_field`, `user_custom_field__custom_field__in`, `user_custom_field__custom_field__not`, `user_custom_field__user_object`, `user_custom_field__user_object__in`, `user_custom_field__user_object__not`, `requesting_user`, `requesting_user__in`, `requesting_user__not`
 - Bei `POST` muss `custom_field` mitgegeben werden.
+- [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_member_custom_field_assignment_change_requests.py)
 
 ### `contact-details/{address_id}/custom-fields`
 - Individuelle Felder einer Adresse anfragen: `contact-details/{address_id}/custom-fields` => `contact-details-custom-field-assignment?address_object={address_id}`
@@ -99,11 +102,13 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 - Bei `bulk-create` muss zusätzlich `address_object` mitgegeben werden.
 - Statt `contact-details/custom-fields/mass-action` gibt es `contact-details/mass-action-custom-fields`. Die Daten, die übergeben werden, bleiben gleich, aber in v3.0 müssen die Felder in snake_case übergeben werden.
+- [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_contact_details_custom_field_assignments.py)
 
 ### `contact-details/{address_id}/change-requests`
 - Adress-Änderungsanfragen einer Adresse anfragen: `contact-details/{address_id}/custom-fields` => `contact-details-change-request?address={address_id}`
 - Eine einzelne Adress-Änderungsanfrage einer Adresse anfragen: `contact-details/{address_id}/custom-fields/{address_change_request_id}` => `contact-details-change-request/{address_change_request_id}`
 - Filtern ist zusätzlich möglich mit:  `address`, `address__in`, `address__not`, `requesting_user`, `requesting_user__in`, `requesting_user__not`
+- [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_contact_details_change_requests.py)
 
 ### `inventory-object/{inventory_object_id}/custom-fields`
 - Individuelle Felder eines Inventargegenstands anfragen: `inventory-object/{inventory_object_id}/custom-fields` => `inventory-object-custom-field-assignment?inventory_object={inventory_object_id}`
@@ -114,6 +119,7 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Bei `bulk-create` muss zusätzlich `inventory_object` mitgegeben werden.
 - Statt `inventory-object/custom-fields/mass-action` gibt es `inventory-object/mass-action-custom-fields`.
 - Filter `customField` mit mehreren komma-getrennten Werten heißt jetzt `custom_field__in`. `custom_field` filtert nur nach einem einzigen Wert.
+- [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_inventory_object_custom_field_assignments.py)
 
 ### `event/{event_id}/custom-fields`
 - Individuelle Felder eines Termins anfragen: `event/{event_id}/custom-fields` => `event-custom-field-assignment?event_object={event_id}`
@@ -122,6 +128,7 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Bei `POST` muss `event_object` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 - Bei `bulk-create` muss zusätzlich `event_object` mitgegeben werden.
+- [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_event_custom_field_assignments.py)
 
 ### `event/{event_id}/participation`
 - Teilnahmen eines Termins anfragen: `event/{event_id}/participation` => `participation/?participation_event={event_id}`
@@ -129,6 +136,9 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Filtern zusätzlich möglich mit: `participation_event`, `participation_event__in`, `participation_event__not`
 - Bei `POST` muss `participation_event` mitgegeben werden.
 - Bei den Actions `create-interval-participation`, `create-participation-with-price-groups` und `bulk-create-participations-with-price-groups` muss in den Request-Daten (bzw. bei `bulk-create-participations-with-price-groups` in jedem der `entries`) ebenfalls `participation_event` mitgegeben werden.
+- Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
+- Bei `bulk-create` muss `participation_event` mitgegeben werden.
+- [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_participation.py)
 
 ### `custom-field/{custom_field_id}/select-options`
 - Auswahloptionen eines individuellen Felds anfragen: `custom-field/{custom_field_id}/select-options` => `select-option?custom_field={custom_field_id}`
@@ -137,6 +147,7 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Bei `POST` muss `custom_field` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 - Bei `bulk-create` muss zusätzlich `custom_field` mitgegeben werden.
+- [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_select_options.py)
 
 ## Geänderte Actions
 - `participation`-Endpunkt:
