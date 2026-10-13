@@ -54,7 +54,7 @@ Das betrifft alle Endpunkte und Actions. (Actions sind Aktionen, die auf einzeln
     - Die Filter eines Endpunkts stehen dort als Query-Parameter bei der Listen-Abfrage, z. B. bei `GET /api/v3.0/booking` die Filter `booking_project__not` und `booking_project_assignment_ne`.
 - `booking`-Endpunkt:
     - `bookingprojectassignment` heißt jetzt `booking_project_assignment`
-    - `billingId__isempty` heißt jetzt `billing_id`
+    - `billingId__isempty` heißt jetzt `billing_id`. Das ist trotz des Namens kein Wertefilter, sondern ein Ja/Nein-Filter: `billing_id=true` liefert die Buchungen mit leerer Billing-ID, `billing_id=false` die Buchungen, deren Billing-ID nicht leer ist. Um nach bestimmten Billing-IDs zu filtern, `billing_id__in` verwenden (z. B. `billing_id__in=1` oder `billing_id__in=1,2,3`).
 - `contact-details`-Endpunkt:
     - `isReferencedByOrgUser` heißt jetzt `is_referenced_by_member`
 
