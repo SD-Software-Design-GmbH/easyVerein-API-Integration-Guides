@@ -10,8 +10,12 @@ Das betrifft alle Endpunkte und Actions. (Actions sind Aktionen, die auf einzeln
 - Das Feld `tokenRefreshNeeded`, welches impliziert, dass das Token erneuert werden muss, heißt jetzt `token_refresh_needed`.
 
 ### Authentifizierung:
-- Das Feld `2FA` im `get-token` Endpunkt heißt jetzt `2_fa`.
-- Das Feld `needs2FA` im `get-token` Endpunkt heißt jetzt `needs2_fa`.
+- Das Feld `2FA` im `get-token` Endpunkt heißt jetzt `two_fa`.
+- Das Feld `needs2FA` in der Antwort des `get-token` Endpunkts heißt jetzt `needs_two_fa`.
+- Das Feld `expiresIn` in der Antwort des `get-token` Endpunkts heißt jetzt `expires_in`.
+
+### Query-Parameter für Listen:
+- Der Parameter `showCount` heißt jetzt `show_count`. In v3.0 wird `showCount` ohne Fehlermeldung ignoriert, die Antwort enthält dann kein `count`.
 
 ### Beispiele wie Felder jetzt heißen:
 - Das Feld `contactDetails` im `member` Endpunkt heißt jetzt `contact_details`.
@@ -24,7 +28,7 @@ Das betrifft alle Endpunkte und Actions. (Actions sind Aktionen, die auf einzeln
 - Das Feld `user_allowICSExport` im `member-group` Endpunkt heißt jetzt `user_allow_ics_export`.
 
 ### Beispiele, wie Actions jetzt Felder erwarten und zurückgeben:
-- In der Action `member/{member_id}/change-password` heißen die Felder `currentPassword`, `newPassword` und `2FA` jetzt `current_password`, `new_password` und `2_fa`.
+- In der Action `member/{member_id}/change-password` heißen die Felder `currentPassword`, `newPassword` und `2FA` jetzt `current_password`, `new_password` und `two_fa`.
 - In der Action `member/me/permissions` heißen die Felder im Rückgabewert wie z. B. `_isChairman`, `bookkeepingEnabled` und `changeBankDataWhenDebit` heißen jetzt `is_chairman`, `bookkeeping_enabled` und `change_bank_data_when_debit`.
 - In der Action `member/email-notification` heißen die Werte für `action` statt z. B. `emailNotificationConfirmResignation` und `emailNotificationConfirmMembership` jetzt `email_notification_confirm_resignation` und `email_notification_confirm_membership`.
 - In der Action `contact-details/income-and-expenses` heißen die Rückgabedaten statt z. B. `totalOfOpenInvoices` und `totalOfOpenInvoicesOut` jetzt `total_of_open_invoices` und `total_of_open_invoices_out`.
@@ -39,14 +43,20 @@ Das betrifft alle Endpunkte und Actions. (Actions sind Aktionen, die auf einzeln
 - Der Filter `contactDetailsGroups` im `contact-details` Endpunkt heißt jetzt `contact_details_groups`.
 
 ### Weitere geänderte Filter
-- Alle Filter, die auf `__not` enden, enden jetzt auf `__ne` (`ne` = *not equal*), beispielhaft:
-    - `bookingprojectassignment__not` heißt jetzt `booking_project_assignment_ne`
-    - `location_object__not` heißt jetzt `location_object__ne`
+- Einige Filter, die auf `__not` enden, enden jetzt auf `__ne` (`ne` = *not equal*), beispielhaft:
+    - `bookingprojectassignment__not` im `booking`-Endpunkt heißt jetzt `booking_project_assignment_ne` (mit nur einem Unterstrich vor `ne`)
+    - `locationObject__not` im `inventory-object`-Endpunkt heißt jetzt `location_object__ne`
+- Das gilt **nicht** für alle Filter. Viele Filter enden in v3.0 weiterhin auf `__not`, und an einem Endpunkt können beide Endungen vorkommen. Beispiele:
+    - `booking`: `billing_account__not` und `booking_project__not`, aber `booking_project_assignment_ne`
+    - `contact-details`: `has_copy_in_org__not`, im `member`-Endpunkt dagegen `has_copy_in_org__ne`
+    - `member-group-assignment`: `member_group__not`, aber `user_object__ne`
+- Maßgeblich ist die API-Dokumentation der v3.0 [https://easyverein.com/api/v3.0/documentation/]. Sie wird aus den tatsächlichen Filtern erzeugt und listet für jeden Endpunkt die gültigen Filternamen.
+    - Die Filter eines Endpunkts stehen dort als Query-Parameter bei der Listen-Abfrage, z. B. bei `GET /api/v3.0/booking` die Filter `booking_project__not` und `booking_project_assignment_ne`.
 - `booking`-Endpunkt:
     - `bookingprojectassignment` heißt jetzt `booking_project_assignment`
-    - `billing_id__isempty` heißt jetzt `billing_id`
-- `member`-Endpunkt:
-    - `is_referenced_by_org_user` heißt jetzt `is_referenced_by_member`
+    - `billingId__isempty` heißt jetzt `billing_id`
+- `contact-details`-Endpunkt:
+    - `isReferencedByOrgUser` heißt jetzt `is_referenced_by_member`
 
 ## Geänderte Endpunkte
 
@@ -69,7 +79,7 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 ### `member/{member_id}/groups`
 - Gruppenmitgliedschaften eines Mitglieds anfragen: `member/{member_id}/groups` => `member-group-assignment?user_object={member_id}`
 - Eine einzelne Gruppenmitgliedschaften eines Mitglieds anfragen: `member/{member_id}/groups/{member_group_assignment_id}` => `member-group-assignment/{member_group_assignment_id}`
-- Filtern ist zusätzlich möglich mit:  `user_object`, `user_object__in`, `user_object__not`
+- Filtern ist zusätzlich möglich mit:  `user_object`, `user_object__in`, `user_object__ne`
 - Bei `POST` muss immer `user_object` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 - Bei `bulk-create` muss zusätzlich immer `user_object` mitgegeben werden.
@@ -81,7 +91,9 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - Ein einzelnes individuelles Feld eines Mitglieds anfragen: `member/{member_id}/custom-fields/{custom_field_assignment_id}` => `member-custom-field-assignment/{custom_field_assignment_id}`
 - Filtern ist zusätzlich möglich mit:  `user_object`, `user_object__in`, `user_object__not`
 - Der Filter `customField` mit mehreren komma-getrennten Werten heißt jetzt `custom_field__in`. `custom_field` filtert nur nach einem einzigen Wert.
-- Bei `POST` muss vom Admin mit Schreibrechten auf der Mitgliederverwaltung `user_object` mitgegeben werden. Ansonsten ist das nicht nötig, da ansonsten der Eintrag immer für einen selbst erstellt wird.
+- Bei `POST` muss immer `custom_field` mitgegeben werden.
+- Bei `POST` mit Schreibrechten auf der Mitgliederverwaltung muss zusätzlich `user_object` mitgegeben werden. Das gilt auch für Organisations-Tokens.
+- Ohne diese Schreibrechte, also als normales Mitglied, wird der Eintrag immer für einen selbst erstellt. `user_object` ist dann nicht nötig.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
 - Bei `bulk-create` muss zusätzlich `user_object` mitgegeben werden.
 - Statt `member/custom-fields/mass-action` gibt es `member/mass-action-custom-fields`. Die Daten, die übergeben werden, bleiben gleich, aber in v3.0 müssen die Felder in snake_case übergeben werden.
@@ -105,14 +117,14 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 - [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_contact_details_custom_field_assignments.py)
 
 ### `contact-details/{address_id}/change-requests`
-- Adress-Änderungsanfragen einer Adresse anfragen: `contact-details/{address_id}/custom-fields` => `contact-details-change-request?address={address_id}`
-- Eine einzelne Adress-Änderungsanfrage einer Adresse anfragen: `contact-details/{address_id}/custom-fields/{address_change_request_id}` => `contact-details-change-request/{address_change_request_id}`
+- Adress-Änderungsanfragen einer Adresse anfragen: `contact-details/{address_id}/change-requests` => `contact-details-change-request?address={address_id}`
+- Eine einzelne Adress-Änderungsanfrage einer Adresse anfragen: `contact-details/{address_id}/change-requests/{address_change_request_id}` => `contact-details-change-request/{address_change_request_id}`
 - Filtern ist zusätzlich möglich mit:  `address`, `address__in`, `address__not`, `requesting_user`, `requesting_user__in`, `requesting_user__not`
 - [Vorher-Nachher-Code-Beispiele](https://github.com/SD-Software-Design-GmbH/easyVerein-API-Integration-Guides/blob/main/v2.0%20to%20v3.0/samples/request_contact_details_change_requests.py)
 
 ### `inventory-object/{inventory_object_id}/custom-fields`
 - Individuelle Felder eines Inventargegenstands anfragen: `inventory-object/{inventory_object_id}/custom-fields` => `inventory-object-custom-field-assignment?inventory_object={inventory_object_id}`
-- Ein einzelnes individuelles Feld eines Inventargegenstands anfragen: `inventory-object/{member_id}/custom-fields/{custom_field_assignment_id}` => `inventory-object-custom-field-assignment/{custom_field_assignment_id}`
+- Ein einzelnes individuelles Feld eines Inventargegenstands anfragen: `inventory-object/{inventory_object_id}/custom-fields/{custom_field_assignment_id}` => `inventory-object-custom-field-assignment/{custom_field_assignment_id}`
 - Filtern ist zusätzlich möglich mit:  `inventory_object`, `inventory_object__in`, `inventory_object__not`
 - Bei `POST` muss `inventory_object` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
@@ -132,8 +144,8 @@ Diese Endpunkte werden durch neue Endpunkte wie folgt abgelöst:
 
 ### `event/{event_id}/participation`
 - Teilnahmen eines Termins anfragen: `event/{event_id}/participation` => `participation/?participation_event={event_id}`
-- Eine einzelne Teilnahme anfragen: `event/{event_id}/participation/{participation_id}` => `participation/participation_id`
-- Filtern zusätzlich möglich mit: `participation_event`, `participation_event__in`, `participation_event__not`
+- Eine einzelne Teilnahme anfragen: `event/{event_id}/participation/{participation_id}` => `participation/{participation_id}`
+- Filtern zusätzlich möglich mit: `participation_event`, `participation_event__in`, `participation_event__ne`
 - Bei `POST` muss `participation_event` mitgegeben werden.
 - Bei den Actions `create-interval-participation`, `create-participation-with-price-groups` und `bulk-create-participations-with-price-groups` muss in den Request-Daten (bzw. bei `bulk-create-participations-with-price-groups` in jedem der `entries`) ebenfalls `participation_event` mitgegeben werden.
 - Es gibt `bulk-update`/`bulk-create` auf diesem Endpunkt.
