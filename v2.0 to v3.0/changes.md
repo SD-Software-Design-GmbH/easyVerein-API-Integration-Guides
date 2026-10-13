@@ -44,16 +44,17 @@ Das betrifft alle Endpunkte und Actions. (Actions sind Aktionen, die auf einzeln
 
 ### Weitere geänderte Filter
 - Einige Filter, die auf `__not` enden, enden jetzt auf `__ne` (`ne` = *not equal*):
-    - `bookingprojectassignment__not` im `booking`-Endpunkt heißt jetzt `booking_project_assignment_ne` (mit nur einem Unterstrich vor `ne`)
+    - `memberGroups__not` im `member`-Endpunkt heißt jetzt `member_groups__ne`
     - `locationObject__not` im `inventory-object`-Endpunkt heißt jetzt `location_object__ne`
 - Das gilt **nicht** für alle Filter. Viele Filter enden in v3.0 weiterhin auf `__not`, und an einem Endpunkt können beide Endungen vorkommen. Beispiele:
-    - `booking`: `billing_account__not` und `booking_project__not`, aber `booking_project_assignment_ne`
+    - `booking`: `billing_account__not` und `booking_project__not`
     - `contact-details`: `has_copy_in_org__not`, im `member`-Endpunkt dagegen `has_copy_in_org__ne`
     - `member-group-assignment`: `member_group__not`, aber `user_object__ne`
 - Maßgeblich ist die API-Dokumentation der v3.0 [https://easyverein.com/api/v3.0/documentation/]. Sie wird aus den tatsächlichen Filtern erzeugt und listet für jeden Endpunkt die gültigen Filternamen.
-    - Die Filter eines Endpunkts stehen dort als Query-Parameter bei der Listen-Abfrage, z. B. bei `GET /api/v3.0/booking` die Filter `booking_project__not` und `booking_project_assignment_ne`.
+    - Die Filter eines Endpunkts stehen dort als Query-Parameter bei der Listen-Abfrage, z. B. bei `GET /api/v3.0/booking` der Filter `booking_project__not`.
 - `booking`-Endpunkt:
     - `bookingprojectassignment` heißt jetzt `booking_project_assignment`
+    - `bookingprojectassignment__not` heißt jetzt `booking_project_assignment_ne`. Achtung, das ist ein Ausreißer: Der Filter endet auf `_ne` mit nur **einem** Unterstrich. Die Schreibweise `booking_project_assignment__ne` wird ohne Fehlermeldung ignoriert.
     - `billingId__isempty` heißt jetzt `billing_id`. Das ist trotz des Namens kein Wertefilter, sondern ein Ja/Nein-Filter: `billing_id=true` liefert die Buchungen mit leerer Billing-ID, `billing_id=false` die Buchungen, deren Billing-ID nicht leer ist. Um nach bestimmten Billing-IDs zu filtern, `billing_id__in` verwenden (z. B. `billing_id__in=1` oder `billing_id__in=1,2,3`).
 - `contact-details`-Endpunkt:
     - `isReferencedByOrgUser` heißt jetzt `is_referenced_by_member`
