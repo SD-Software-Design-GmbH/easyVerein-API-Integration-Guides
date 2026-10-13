@@ -43,7 +43,7 @@ Das betrifft alle Endpunkte und Actions. (Actions sind Aktionen, die auf einzeln
 - Der Filter `contactDetailsGroups` im `contact-details` Endpunkt heißt jetzt `contact_details_groups`.
 
 ### Weitere geänderte Filter
-- Einige Filter, die auf `__not` enden, enden jetzt auf `__ne` (`ne` = *not equal*), beispielhaft:
+- Einige Filter, die auf `__not` enden, enden jetzt auf `__ne` (`ne` = *not equal*):
     - `bookingprojectassignment__not` im `booking`-Endpunkt heißt jetzt `booking_project_assignment_ne` (mit nur einem Unterstrich vor `ne`)
     - `locationObject__not` im `inventory-object`-Endpunkt heißt jetzt `location_object__ne`
 - Das gilt **nicht** für alle Filter. Viele Filter enden in v3.0 weiterhin auf `__not`, und an einem Endpunkt können beide Endungen vorkommen. Beispiele:
